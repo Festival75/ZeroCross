@@ -15,12 +15,12 @@ class GameHelper {
         verifList.add(0, "a1");
         verifList.add(1, "a2");
         verifList.add(2, "a3");
-        verifList.add(0, "b1");
-        verifList.add(1, "b2");
-        verifList.add(2, "b3");
-        verifList.add(0, "c1");
-        verifList.add(1, "c2");
-        verifList.add(2, "c3");
+        verifList.add(3, "b1");
+        verifList.add(4, "b2");
+        verifList.add(5, "b3");
+        verifList.add(6, "c1");
+        verifList.add(7, "c2");
+        verifList.add(8, "c3");
 
         modField[0][0] = ".";
         modField[0][1] = ".";
@@ -60,11 +60,10 @@ class GameHelper {
     }
 
     String[][] play() {
-
+        boolean weHaveAWinner = false;
         String[][] mField = new String[3][3];
         while (!verifList.isEmpty()) {
             String winner = null;
-            boolean weHaveAWinner = false;
             String inputLane = getUserInput();
             switch (inputLane) {
                 case ("a1"):
@@ -105,10 +104,162 @@ class GameHelper {
                     break;
             }
 
+            if (verifList.isEmpty()){
+                System.out.println("Game Over");
+                System.exit(0);
+            }
+
             int rnd;
             String aiMove;
             rnd = (int) (Math.random() * verifList.size());
             aiMove = verifList.get(rnd);
+//начало блока логики компьютера
+// 1ряд x x .
+            if (modField[2][0] == ".") {
+                if ((modField[0][0] == "x") && (modField[1][0] == "x")) {
+                    aiMove = "c1";
+                }
+            }
+// 2ряд x x .
+            if (modField[2][1] == ".") {
+                if ((modField[0][1] == "x") && (modField[1][1] == "x")) {
+                    aiMove = "c2";
+                }
+            }
+// 3ряд x x .
+            if (modField[2][2] == ".") {
+                if ((modField[0][2] == "x") && (modField[1][2] == "x")) {
+                    aiMove = "c3";
+                }
+            }
+// 1ряд x . x
+            if (modField[1][0] == ".") {
+                if ((modField[0][0] == "x") && (modField[2][0] == "x")) {
+                    aiMove = "b1";
+                }
+            }
+// 2ряд x . x
+            if (modField[1][1] == ".") {
+                if ((modField[0][1] == "x") && (modField[2][1] == "x")) {
+                    aiMove = "b2";
+                }
+            }
+// 3ряд x . x
+            if (modField[1][2] == ".") {
+                if ((modField[0][2] == "x") && (modField[2][2] == "x")) {
+                    aiMove = "b3";
+                }
+            }
+// 1ряд . x x
+            if (modField[0][0] == ".") {
+                if ((modField[1][0] == "x") && (modField[2][0] == "x")) {
+                    aiMove = "a1";
+                }
+            }
+// 2ряд . x x
+            if (modField[0][1] == ".") {
+                if ((modField[1][1] == "x") && (modField[2][1] == "x")) {
+                    aiMove = "a2";
+                }
+            }
+// 3ряд . x x
+            if (modField[0][2] == ".") {
+                if ((modField[1][2] == "x") && (modField[2][2] == "x")) {
+                    aiMove = "a3";
+                }
+            }
+// 1столбец . x x
+            if (modField[0][0] == ".") {
+                if ((modField[0][1] == "x") && (modField[0][2] == "x")) {
+                    aiMove = "a1";
+                }
+            }
+// 2столбец . x x
+            if (modField[1][0] == ".") {
+                if ((modField[1][1] == "x") && (modField[1][2] == "x")) {
+                    aiMove = "b1";
+                }
+            }
+// 3столбец . x x
+            if (modField[2][0] == ".") {
+                if ((modField[2][1] == "x") && (modField[2][2] == "x")) {
+                    aiMove = "c1";
+                }
+            }
+// 1столбец x . x
+            if (modField[0][1] == ".") {
+                if ((modField[0][0] == "x") && (modField[0][2] == "x")) {
+                    aiMove = "a2";
+                }
+            }
+// 2столбец x . x
+            if (modField[1][1] == ".") {
+                if ((modField[1][0] == "x") && (modField[1][2]== "x")) {
+                    aiMove = "b2";
+                }
+            }
+// 3столбец x . x
+            if (modField[2][1] == ".") {
+                if ((modField[2][0] == "x") && (modField[2][2] == "x")) {
+                    aiMove = "c2";
+                }
+            }
+// 1столбец x x .
+            if (modField[0][2] == ".") {
+                if ((modField[0][1] == "x") && (modField[0][0] == "x")) {
+                    aiMove = "a3";
+                }
+            }
+// 2столбец x x .
+            if (modField[1][2] == ".") {
+                if ((modField[1][1] == "x") && (modField[1][0] == "x")) {
+                    aiMove = "b3";
+                }
+            }
+// 3столбец x x .
+            if (modField[2][2] == ".") {
+                if ((modField[2][1] == "x") && (modField[2][0] == "x")) {
+                    aiMove = "c3";
+                }
+            }
+// возростающая диагональ x x .
+            if (modField[2][0] == ".") {
+                if ((modField[1][1] == "x") && (modField[0][2] == "x")) {
+                    aiMove = "c1";
+                }
+            }
+// возростающая диагональ x . x.
+            if (modField[1][1] == ".") {
+                if ((modField[0][2] == "x") && (modField[2][0] == "x")) {
+                    aiMove = "b2";
+                }
+            }
+// возростающая диагональ . x x
+            if (modField[0][2] == ".") {
+                if ((modField[1][1] == "x") && (modField[2][0] == "x")) {
+                    aiMove = "a3";
+                }
+            }
+// убывающая диагональ x x .
+            if (modField[2][2] == ".") {
+                if ((modField[1][1] == "x") && (modField[0][0] == "x")) {
+                    aiMove = "c3";
+                }
+            }
+// убывающая диагональ x . x.
+            if (modField[1][1] == ".") {
+                if ((modField[0][0] == "x") && (modField[2][2] == "x")) {
+                    aiMove = "b2";
+                }
+            }
+// убывающая диагональ . x x
+            if (modField[0][0] == ".") {
+                if ((modField[1][1] == "x") && (modField[2][2] == "x")) {
+                    aiMove = "a1";
+                }
+            }
+
+//конец блока логики компьютера
             System.out.println("Ход компьютера:");
             System.out.println(aiMove);
             switch (aiMove) {
@@ -181,6 +332,10 @@ class GameHelper {
                 System.out.println("У нас есть победитель!");
                 System.out.println("Победил - " + winner + "!");
                 break;
+            }
+            if (verifList.isEmpty()){
+                System.out.println("Game Over");
+                System.exit(0);
             }
             System.out.println("Доступные ходы: " + verifList);
             mField = modField;
