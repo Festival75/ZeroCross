@@ -32,8 +32,8 @@ class GameHelper {
     }
 
     void clrscr() {
-        for (long i = 0; i < 99999999; i++) {
-            System.out.print((char) 8);
+        for (long i = 0; i < 20; i++) {
+            System.out.println();
         }
     }
 }

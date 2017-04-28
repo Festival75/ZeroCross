@@ -8,6 +8,7 @@ import java.util.ArrayList;
 class Player {
     private String [][] userField = new String[3][3];
     private ArrayList<String> userVList;
+    private String inputLane = null;
 
 
     void makeMove(ArrayList<String> vList){
@@ -16,7 +17,11 @@ class Player {
             System.out.println("GameOver");
             System.exit(0);
         }
-        String inputLane = getUserInput();
+
+        do {
+            System.out.println("Пожалуйста введите ход, из списка доступных ходов");
+            inputLane = getUserInput();
+        }while (!vList.contains(inputLane));
         switch (inputLane) {
             case ("a1"):
                 userField[0][0] = "x";

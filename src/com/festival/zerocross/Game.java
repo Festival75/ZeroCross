@@ -16,7 +16,7 @@ public class Game {
         ArrayList<String> vList = field.getvList();
         field.drawField(gameField);//выводим в консоль массив из точек
 
-        while(!vList.isEmpty()) {
+        while (!vList.isEmpty()) {
             player.setUserField(gameField);//отправляем классу Player текущее состояние поля
             player.makeMove(vList);//изменяем состояние поля в классе Player
             gameField = player.getUserField();//получаем текущее состояние поля от класса Player
@@ -32,7 +32,6 @@ public class Game {
             field.drawField(gameField);//отрисовываем текущее состояние поля
             helper.checkWinner(gameField);//проверка на победителя
         }
-
 
 
     }
